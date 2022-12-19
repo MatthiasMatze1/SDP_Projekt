@@ -1,13 +1,9 @@
-FROM ubuntu:14.04
+ FROM arm32v6/python:3.9-alpine
 
-RUN \ 
-	apt-get update && \
-	apt-get -y install apache2
-
-ADD index.html /var/www/html/index.html
-
-EXPOSE 80
-
-CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
-
+# gcc needed for python RPi.GPIO library
+RUN apk update
+RUN apk add python3-dev \
+            gcc \
+            libc-dev \
+            libffi-dev
 
