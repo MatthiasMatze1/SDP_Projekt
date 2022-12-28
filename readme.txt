@@ -26,3 +26,13 @@ https://flask.palletsprojects.com/en/2.1.x/tutorial/factory/
 http://raspberrypi.local:5000/cpu/ram
 http://raspberrypi.local:5000/cpu/auslastung
 http://raspberrypi.local:5000/cpu/temp
+
+
+------------------
+build docker image:
+
+go into main directory and run
+> docker build docker 
+
+param:
+-docker: directory containing docker file
