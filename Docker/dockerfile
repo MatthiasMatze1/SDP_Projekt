@@ -1,9 +1,0 @@
- FROM arm32v6/python:3.9-alpine
-
-# gcc needed for python RPi.GPIO library
-RUN apk update
-RUN apk add python3-dev \
-            gcc \
-            libc-dev \
-            libffi-dev
-
