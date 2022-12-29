@@ -36,3 +36,18 @@ go into main directory and run
 
 param:
 -docker: directory containing docker file
+
+----
+build docker image :
+>sudo docker build docker
+
+
+----
+start all of this with 
+the last param is the id of the docker image created during build
+>^Cpi@raspberrypi:~/Desktop/SDP $ docker run -p 80:5000 a9ffe2cb865c
+
+access via webbrowser (or ip address)
+>http://raspberrypi.local/cpu/auslastung
+
+
