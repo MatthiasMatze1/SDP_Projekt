@@ -23,7 +23,7 @@ https://flask.palletsprojects.com/en/2.1.x/tutorial/factory/
 -Standard Blueprint used
 
 -All possible URLs:
-http://raspberrypi.local:5000/cpu/ram
+raspberrypi:80/cpu/temp
 http://raspberrypi.local:5000/cpu/auslastung
 http://raspberrypi.local:5000/cpu/temp
 
@@ -45,7 +45,7 @@ build docker image :
 ----
 start all of this with 
 the last param is the id of the docker image created during build
->^Cpi@raspberrypi:~/Desktop/SDP $ docker run -p 80:5000 a9ffe2cb865c
+pi@raspberrypi:~/Desktop/SDP $ docker run -p 80:5000 a9ffe2cb865c
 
 access via webbrowser (or ip address)
 >http://raspberrypi.local/cpu/auslastung
