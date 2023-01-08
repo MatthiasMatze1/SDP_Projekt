@@ -43,11 +43,11 @@ ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
 
-COPY requirements/base.txt /tmp/
+COPY requirements/dev.txt /tmp/
 
 CMD ["ls"]
 RUN ls 
-RUN pip3 install --requirement /tmp/base.txt
+RUN pip3 install --requirement /tmp/dev.txt
 
 COPY . .
 
