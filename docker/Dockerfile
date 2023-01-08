@@ -45,7 +45,7 @@ EXPOSE 5000
 
 COPY requirements/base.txt /tmp/
 
-CMD ["ls"]
+
 RUN ls 
 RUN pip3 install --requirement /tmp/base.txt
 
