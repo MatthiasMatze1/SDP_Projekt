@@ -15,7 +15,7 @@ WORKDIR /SDP
 
 ENV FLASK_APP=app
 EXPOSE 5000
-COPY /requirements/base.txt base.txt
+COPY requirements/base.txt base.txt
 
 
 RUN pip3 install -r base.txt
@@ -41,8 +41,7 @@ WORKDIR /SDP
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
-COPY /requirements/base.txt base.txt
-
+COPY requirements/base.txt base.txt
 
 RUN pip3 install -r base.txt
 
