@@ -18,7 +18,7 @@ EXPOSE 5000
 COPY docker/requirements/base.txt /requirements
 
 
-RUN pip3 install -r base.txt
+RUN pip3 install -r requirements/base.txt
 
 COPY . .
 
@@ -43,7 +43,7 @@ ENV FLASK_ENV=development
 EXPOSE 5000
 COPY docker/requirements/base.txt /requirements
 
-RUN pip3 install -r base.txt
+RUN pip3 install -r requirements/base.txt
 
 COPY . .
 
