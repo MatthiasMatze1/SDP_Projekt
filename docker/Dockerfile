@@ -15,11 +15,11 @@ WORKDIR /SDP
 
 ENV FLASK_APP=app
 EXPOSE 5000
-COPY docker/requirements/base.txt /requirements
+COPY requirements/base.txt /tmp/base.txt
 
 CMD ["ls"]
-
-RUN pip3 install -r SDP/requirements/base.txt
+RUN ls 
+RUN pip3 install -r /tmp/base.txt
 
 COPY . .
 
@@ -42,11 +42,11 @@ WORKDIR /SDP
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
-COPY docker/requirements/base.txt /requirements
+COPY requirements/base.txt /tmp/base.txt
 
 CMD ["ls"]
-
-RUN pip3 install -r SDP/requirements/base.txt
+RUN ls 
+RUN pip3 install -r /tmp/base.txt
 
 COPY . .
 
