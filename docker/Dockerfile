@@ -11,15 +11,15 @@ RUN apk add python3-dev \
             libc-dev \
             libffi-dev
 
-WORKDIR /SDP
+#WORKDIR /SDP
 
 ENV FLASK_APP=app
 EXPOSE 5000
-COPY requirements/base.txt /tmp/base.txt
+COPY requirements/base.txt /tmp/
 
 CMD ["ls"]
 RUN ls 
-RUN pip3 install -r /tmp/base.txt
+RUN pip3 install --requirement /tmp/base.txt
 
 COPY . .
 
@@ -37,16 +37,17 @@ RUN apk add python3-dev \
             libc-dev \
             libffi-dev
 
-WORKDIR /SDP
+#WORKDIR /SDP
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
-COPY requirements/base.txt /tmp/base.txt
+
+COPY requirements/base.txt /tmp/
 
 CMD ["ls"]
 RUN ls 
-RUN pip3 install -r /tmp/base.txt
+RUN pip3 install --requirement /tmp/base.txt
 
 COPY . .
 
