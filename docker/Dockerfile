@@ -19,7 +19,7 @@ COPY requirements/base.txt /tmp/
 
 CMD ["ls"]
 RUN ls 
-RUN pip3 install --requirement /tmp/base.txt
+RUN pip3 install -r /tmp/base.txt
 
 COPY . .
 
@@ -47,7 +47,7 @@ COPY requirements/dev.txt /tmp/
 
 CMD ["ls"]
 RUN ls 
-RUN pip3 install --requirement /tmp/dev.txt
+RUN pip3 install -r /tmp/dev.txt
 
 COPY . .
 
