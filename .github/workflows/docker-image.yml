@@ -36,8 +36,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3.2.0
         with:
-          context: ./requirements
-          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:latest
           
