@@ -39,3 +39,4 @@ jobs:
           file: ./docker/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:latest
+          context: ./SDP
