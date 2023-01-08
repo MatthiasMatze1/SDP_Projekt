@@ -43,7 +43,7 @@ ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
 
-COPY /home/pi/Desktop/SDP/docker/requirements/dev.txt /tmp/
+COPY home/pi/Desktop/SDP/docker/requirements/dev.txt /tmp/
 
 CMD ["ls"]
 RUN ls 
