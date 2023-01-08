@@ -17,7 +17,7 @@ ENV FLASK_APP=app
 EXPOSE 5000
 COPY docker/requirements/base.txt /requirements
 
-RUN ls -al
+RUN ls
 
 RUN pip3 install -r SDP/requirements/base.txt
 
@@ -44,7 +44,7 @@ ENV FLASK_ENV=development
 EXPOSE 5000
 COPY docker/requirements/base.txt /requirements
 
-RUN ls -al
+RUN ls
 
 RUN pip3 install -r SDP/requirements/base.txt
 
