@@ -18,7 +18,7 @@ jobs:
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
   docker:
-    runs-on: ubuntu-latest
+    runs-on: arm32v6/python:3.9-alpine
     steps:
       -
         name: Set up QEMU
