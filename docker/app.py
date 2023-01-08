@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import Blueprint
 import psutil
-
+#test
 app = Flask(__name__)
 
 bp = Blueprint('cpu', __name__, url_prefix='/cpu')
