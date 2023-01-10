@@ -1,22 +1,11 @@
-name: Docker Image CI
+name: ci
 
 on:
   push:
-    branches: [ "master", "matthias" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - 'main'
 
 jobs:
-
-  build:
-
-    runs-on: arm32v6/python:3.9-alpine
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
   docker:
     runs-on: ubuntu-latest
     steps:
@@ -34,10 +23,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@v3
         with:
-          file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:latest
-          context: .
-          
+          tags: user/app:latest
