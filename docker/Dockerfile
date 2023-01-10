@@ -35,13 +35,13 @@ RUN apk add python3-dev \
            libc-dev \
            libffi-dev
 
-#WORKDIR /SDP
+WORKDIR /SDP
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
 
-COPY /requirements/dev.txt /tmp/
+COPY --from=build requirements/dev.txt /tmp/
 
 RUN pip3 install -r /tmp/dev.txt
 
