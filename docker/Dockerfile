@@ -35,7 +35,7 @@ RUN apk add python3-dev \
            libc-dev \
            libffi-dev
 
-WORKDIR /SDP
+#WORKDIR /SDP
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
