@@ -18,7 +18,7 @@ EXPOSE 5000
 COPY requirements/base.txt base.txt
 
 RUN pip3 install -r base.txt
-#abc
+
 COPY . .
 
 CMD ["FLASK_APP=app"]
