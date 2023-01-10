@@ -2,8 +2,9 @@ name: docker image
 
 on:
   push:
-    branches:
-      - 'main'
+    branches: [ "master", "matthias" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   docker:
