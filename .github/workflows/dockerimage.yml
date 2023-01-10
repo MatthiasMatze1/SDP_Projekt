@@ -31,4 +31,4 @@ jobs:
         with:
           context: "{{defaultContext}}:docker"
           push: true
-          tags: user/app:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:latest
