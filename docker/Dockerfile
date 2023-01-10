@@ -41,7 +41,7 @@ ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
 
-COPY requirements/dev.txt /tmp/
+COPY /requirements/dev.txt /tmp/
 
 RUN pip3 install -r /tmp/dev.txt
 
