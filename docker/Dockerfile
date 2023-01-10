@@ -12,10 +12,10 @@ RUN apk add python3-dev \
             libc-dev \
             libffi-dev
 
-RUN python -m venv/opt/venv
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Virtual env die später wieder verwendet wird
-ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip install --upgrade pip 
 
@@ -23,7 +23,6 @@ WORKDIR /SDP
 
 ENV FLASK_APP=app
 EXPOSE 5000
-
 COPY requirements/base.txt base.txt
 
 RUN pip3 install -r base.txt
@@ -67,16 +66,3 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 #       coverage report [...]
 #       fails if test coverage is below 80%
 #       FROM arm32v6/python:3.9-alpine AS production
-
-# test stage
-FROM base AS test
-
-RUN echo "---Building test image---"
-
-COPY --from=base /opt/venv /opt/venv
-
-COPY --from=build requirements/dev.txt /tmp/
-
-RUN pip3 install -r /tmp/dev.txt
-
-WORKDIR /SDP
