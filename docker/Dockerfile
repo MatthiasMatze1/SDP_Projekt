@@ -31,7 +31,7 @@ COPY . .
 
 CMD ["FLASK_APP=app"]
 CMD ["python3","-m","flask","run","--host=0.0.0.0"]
-
+#
 #---------------------------------------------------------------------------------
 FROM base AS development
 #Angabe:will start Flask server in debug mode
@@ -86,6 +86,6 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 
 #COPY app/ app/
 
-ENV PATH="/opt/venv/bin:$PATH"
+#ENV PATH="/opt/venv/bin:$PATH"
 
 # RUN ["flake8","app/"]
