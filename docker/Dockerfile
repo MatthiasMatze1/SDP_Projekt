@@ -68,3 +68,23 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 #       coverage report [...]
 #       fails if test coverage is below 80%
 #       FROM arm32v6/python:3.9-alpine AS production
+# test stage
+#FROM base AS test
+
+#RUN echo "---Building test image---"
+
+#COPY --from=base /opt/venv /opt/venv
+
+#WORKDIR /SDP
+
+#COPY --from=build requirements/test.txt test.txt
+
+#RUN pip3 install -r dev.txt
+
+# Code mitkopieren -> geht schneller
+
+#COPY app/ app/
+
+ENV PATH="/opt/venv/bin:$PATH"
+
+# RUN ["flake8","app/"]
