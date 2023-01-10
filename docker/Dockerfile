@@ -5,19 +5,28 @@
  # docker build -t docker --target prod -> multistage docker zeugs
 
 # gcc needed for python RPi.GPIO library
+RUN echo "---Building base image---"
 RUN apk update
 RUN apk add python3-dev \
             gcc \
             libc-dev \
             libffi-dev
 
+RUN python -m venv/opt/venv
+
+# Virtual env die später wieder verwendet wird
+ENV PATH="/opt/venv/bin:$PATH"
+
+RUN pip install --upgrade pip 
+
 WORKDIR /SDP
 
 ENV FLASK_APP=app
 EXPOSE 5000
+
 COPY requirements/base.txt base.txt
 
-RUN pip3 install -r requirements/base.txt
+RUN pip3 install -r base.txt
 
 COPY . .
 
@@ -25,24 +34,25 @@ CMD ["FLASK_APP=app"]
 CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 
 #---------------------------------------------------------------------------------
-FROM arm32v6/python:3.9-alpine AS development
+FROM base AS development
 #Angabe:will start Flask server in debug mode
 #       flask --debug run --host=0.0.0.0
 # gcc needed for python RPi.GPIO library
 RUN apk update
 RUN apk add python3-dev \
             gcc \
-            libc-dev \
-            libffi-dev
+           libc-dev \
+           libffi-dev
 
 WORKDIR /SDP
 
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
 EXPOSE 5000
-COPY requirements/base.txt base.txt
 
-RUN pip3 install -r requirements/base.txt
+COPY --from=build requirements/dev.txt /tmp/
+
+RUN pip3 install -r /tmp/dev.txt
 
 COPY . .
 
@@ -57,3 +67,16 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 #       coverage report [...]
 #       fails if test coverage is below 80%
 #       FROM arm32v6/python:3.9-alpine AS production
+
+# test stage
+FROM base AS test
+
+RUN echo "---Building test image---"
+
+COPY --from=base /opt/venv /opt/venv
+
+COPY --from=build requirements/dev.txt /tmp/
+
+RUN pip3 install -r /tmp/dev.txt
+
+WORKDIR /SDP
