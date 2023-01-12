@@ -2,13 +2,12 @@ name: develop_action build docker test stage and build and push dev image to Doc
 
 on:
   push:
-    branches: [ "develop" ]
-
+    branches:
+      - 'develop'
 
 jobs:
   docker:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
