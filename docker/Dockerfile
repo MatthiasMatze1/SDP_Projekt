@@ -50,11 +50,11 @@ ENV FLASK_ENV=development
 EXPOSE 5000
 
 #COPY --from=build requirements/dev.txt /tmp/
-COPY requirements/dev.txt /tmp/
+#COPY requirements/dev.txt /tmp/
+COPY requirements/dev.txt dev.txt
 
-
-RUN pip3 install -r /tmp/dev.txt
-RUN pip3 install -r /tmp/dev.txt
+#RUN pip3 install -r /tmp/dev.txt
+RUN pip3 install -r dev.txt
 
 COPY . .
 
