@@ -3,7 +3,7 @@ name: develop_action build docker test stage and build and push dev image to Doc
 on:
   push:
     branches:
-      - 'develop'
+      - 'main'
 
 jobs:
   docker:
@@ -23,8 +23,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-     -
+      -
         name: Build and push
         uses: docker/build-push-action@v3
         with:
