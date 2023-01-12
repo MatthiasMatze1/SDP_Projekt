@@ -2,8 +2,8 @@ name: develop_action build docker test stage and build and push dev image to Doc
 
 on:
   push:
-    branches:
-      - 'main'
+    branches: ["develop"]
+
 
 jobs:
   docker:
