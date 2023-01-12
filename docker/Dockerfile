@@ -90,22 +90,24 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 
 # RUN ["flake8","app/"]
 
-FROM base AS production
 
-WORKDIR /SDP
+#-------------------------------------------------------------
+#FROM base AS production
 
-ENV FLASK_APP=app
-ENV FLASK_ENV=development
-EXPOSE 5000
+#WORKDIR /SDP
+
+#ENV FLASK_APP=app
+#ENV FLASK_ENV=development
+#EXPOSE 5000
 
 #COPY --from=build requirements/dev.txt /tmp/
-COPY requirements/dev.txt /tmp/
+#COPY requirements/dev.txt /tmp/
 
 
-RUN pip3 install -r /tmp/dev.txt
-RUN pip3 install -r /tmp/dev.txt
+#RUN pip3 install -r /tmp/dev.txt
+#RUN pip3 install -r /tmp/dev.txt
 
-COPY . .
+#COPY . .
 
-CMD ["FLASK_APP=app"]
-CMD ["python3","-m","flask","run","--host=0.0.0.0"]
+#CMD ["FLASK_APP=app"]
+#CMD ["python3","-m","flask","run","--host=0.0.0.0"]
