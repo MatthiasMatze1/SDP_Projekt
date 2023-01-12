@@ -5,7 +5,7 @@
  # docker build -t docker --target prod -> multistage docker zeugs
 
 # gcc needed for python RPi.GPIO library
-RUN echo "---Building base image---"
+RUN echo "--------------------BUILDING BASE IMAGE--------------------"
 RUN apk update
 RUN apk add python3-dev \
             gcc \
@@ -32,16 +32,18 @@ COPY . .
 CMD ["FLASK_APP=app"]
 CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 #
-#---------------------------------------------------------------------------------
+#-----------------------------------------DEVELOPMENT------------------------------------------------------------------
+
 FROM base AS development
 #Angabe:will start Flask server in debug mode
 #       flask --debug run --host=0.0.0.0
 # gcc needed for python RPi.GPIO library
-RUN apk update
-RUN apk add python3-dev \
-            gcc \
-           libc-dev \
-           libffi-dev
+#RUN apk update
+#RUN apk add python3-dev \
+ #           gcc \
+ #          libc-dev \
+ #          libffi-dev
+RUN echo "--------------------BUILDING DEVELOPMENT IMAGE--------------------"
 
 WORKDIR /SDP
 
@@ -54,13 +56,14 @@ EXPOSE 5000
 COPY requirements/dev.txt dev.txt
 
 #RUN pip3 install -r /tmp/dev.txt
-RUN pip3 install -r dev.txt
+#RUN pip3 install -r dev.txt
 
 COPY . .
 
 CMD ["FLASK_APP=app"]
 CMD ["python3","-m","flask","run","--host=0.0.0.0"]
-#---------------------------------------------------------------------------------
+#-----------------------------------------TEST------------------------------------------------------------------
+
 #FROM arm32v6/python:3.9-alpine AS test
 #Angabe:run linter (https://flake8.pycqa.org/en/latest/)
 #       run tests (first unit tests, then integration tests)
@@ -72,7 +75,8 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 # test stage
 #FROM base AS test
 
-#RUN echo "---Building test image---"
+#RUN echo "--------------------BUILDING TEST IMAGE--------------------"
+
 
 #COPY --from=base /opt/venv /opt/venv
 
@@ -91,9 +95,13 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 # RUN ["flake8","app/"]
 
 
-#-------------------------------------------------------------
+#-----------------------------------------PRODUCTION------------------------------------------------------------------
 #FROM base AS production
 RUN echo "build Production image"
+
+RUN echo "--------------------BUILDING PRODUCTION IMAGE--------------------"
+
+
 #WORKDIR /SDP
 
 #ENV FLASK_APP=app
