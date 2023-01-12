@@ -93,7 +93,7 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 
 #-------------------------------------------------------------
 #FROM base AS production
-
+RUN echo "build Production image"
 #WORKDIR /SDP
 
 #ENV FLASK_APP=app
