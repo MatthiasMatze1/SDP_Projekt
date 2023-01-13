@@ -82,21 +82,6 @@ FROM base AS test
 
 RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 
-
-#---------------------------------------------------------------------------------
-
-#Angabe:run linter (https://flake8.pycqa.org/en/latest/)
-#       run tests (first unit tests, then integration tests)
-#       coverage run -m pytest [...]
-#       check coverage
-#       coverage report [...]
-#       fails if test coverage is below 80%
-#       FROM arm32v6/python:3.9-alpine AS production
-# test stage
-FROM base AS test
-
-#RUN echo "---Building test image---"
-
 #COPY --from=base /opt/venv /opt/venv
 
 #WORKDIR /SDP
