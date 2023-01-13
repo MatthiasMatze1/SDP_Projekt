@@ -22,6 +22,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+  
+      - uses: actions/checkout@v3
+        name: Build Docker test stage
+      - run: docker build . --file Dockerfile --target test --tag projekt:test
 
       -
         name: Build and push
