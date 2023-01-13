@@ -64,15 +64,14 @@ CMD ["FLASK_APP=app"]
 CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 #-----------------------------------------TEST------------------------------------------------------------------
 
-#FROM arm32v6/python:3.9-alpine AS test
-#Angabe:run linter (https://flake8.pycqa.org/en/latest/)
-#       run tests (first unit tests, then integration tests)
-#       coverage run -m pytest [...]
-#       check coverage
-#       coverage report [...]
-#       fails if test coverage is below 80%
-#       FROM arm32v6/python:3.9-alpine AS production
-# test stage
+#Angabe:
+#       -run linter (https://flake8.pycqa.org/en/latest/)
+#       -run tests (first unit tests, then integration tests)
+#           -coverage run -m pytest [...]
+#       -check coverage
+#           -coverage report [...]
+#       -fails if test coverage is below 80%
+
 #FROM base AS test
 
 #RUN echo "--------------------BUILDING TEST IMAGE--------------------"
@@ -84,7 +83,7 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 
 #COPY --from=build requirements/test.txt test.txt
 
-#RUN pip3 install -r dev.txt
+#RUN pip3 install -r test.txt
 
 # Code mitkopieren -> geht schneller
 
@@ -109,11 +108,10 @@ RUN echo "--------------------BUILDING PRODUCTION IMAGE--------------------"
 #EXPOSE 5000
 
 #COPY --from=build requirements/dev.txt /tmp/
-#COPY requirements/dev.txt /tmp/
+#COPY requirements/prod.txt prod.txt
 
 
-#RUN pip3 install -r /tmp/dev.txt
-#RUN pip3 install -r /tmp/dev.txt
+#RUN pip3 install -r /tmp/prod.txt
 
 #COPY . .
 
