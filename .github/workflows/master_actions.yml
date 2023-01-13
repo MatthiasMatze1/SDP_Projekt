@@ -1,9 +1,8 @@
 name: build docker test stage and build and push prod image
 
 on:
-  push:
-    branches:
-      - 'main'
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   docker:
