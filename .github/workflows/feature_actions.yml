@@ -12,4 +12,4 @@ jobs:
     
     steps:
     - uses: docker/build-push-action@v3.2.0
-    - run: docker build . --file Dockerfile --tag projekt:test
+    - run: docker build . --file docker/Dockerfile --tag projekt:test
