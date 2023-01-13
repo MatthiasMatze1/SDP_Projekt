@@ -72,16 +72,16 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 #           -coverage report [...]
 #       -fails if test coverage is below 80%
 
-#FROM base AS test
+FROM base AS test
 
-#RUN echo "--------------------BUILDING TEST IMAGE--------------------"
+RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 
 
 #COPY --from=base /opt/venv /opt/venv
 
 #WORKDIR /SDP
 
-#COPY --from=build requirements/test.txt test.txt
+#COPY requirements/test.txt test.txt
 
 #RUN pip3 install -r test.txt
 
@@ -91,29 +91,29 @@ CMD ["python3","-m","flask","run","--host=0.0.0.0"]
 
 #ENV PATH="/opt/venv/bin:$PATH"
 
-# RUN ["flake8","app/"]
+#RUN ["flake8","app/"]
 
 
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
-#FROM base AS production
+FROM base AS production
 RUN echo "build Production image"
 
 RUN echo "--------------------BUILDING PRODUCTION IMAGE--------------------"
 
 
-#WORKDIR /SDP
+WORKDIR /SDP
 
-#ENV FLASK_APP=app
+ENV FLASK_APP=app
 #ENV FLASK_ENV=development
-#EXPOSE 5000
+EXPOSE 5000
 
 #COPY --from=build requirements/dev.txt /tmp/
-#COPY requirements/prod.txt prod.txt
+COPY requirements/prod.txt prod.txt
 
 
-#RUN pip3 install -r /tmp/prod.txt
+#RUN pip3 install -r prod.txt
 
 #COPY . .
 
-#CMD ["FLASK_APP=app"]
-#CMD ["python3","-m","flask","run","--host=0.0.0.0"]
+CMD ["FLASK_APP=app"]
+CMD ["python3","-m","flask","run","--host=0.0.0.0"]
