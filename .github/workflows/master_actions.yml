@@ -1,4 +1,4 @@
-name: ci
+name: build docker test stage and build and push prod image
 
 on:
   push:
@@ -27,3 +27,18 @@ jobs:
         with:
           push: true
           tags: user/app:latest
+          
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: "{{defaultContext}}:docker"
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:production
+          target: production
+          
+          
+      - uses: actions/checkout@v3
+        name: Build Docker test stage
+      - run: docker build . --file Dockerfile --target test --tag projekt:test
