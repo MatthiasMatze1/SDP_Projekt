@@ -1,7 +1,0 @@
-name: Build and push Docker images
-on: [push]
-
-steps:
-  uses: docker/build-push-action@v3.2.0
-  -run: docker build dockerfile
-  -run: 
