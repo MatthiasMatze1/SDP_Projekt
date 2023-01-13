@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file docker/Dockerfile --platform linux/amd64,linux/arm32v6 --target test --tag projekt:test
+        run: docker build . --file docker/Dockerfile --platform linux/arm32v6 --target test --tag projekt:test
 
   docker:
     runs-on: ubuntu-latest
