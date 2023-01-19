@@ -3,8 +3,6 @@ name: docker image
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   docker:
@@ -24,16 +22,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-  
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: "{{defaultContext}}:docker"
-          platforms: linux/amd64,linux/arm64
-          push: false
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:test
-          target: test
 
       -
         name: Build and push
