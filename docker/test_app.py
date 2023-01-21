@@ -6,6 +6,8 @@ from flask import Flask
 import psutil
 from app import app, bp, bptemp, bpdisk
 from flask.testing import FlaskClient
+import re
+
 
 @pytest.fixture
 def client():
@@ -16,7 +18,10 @@ def client():
 def test_cpu_auslastung(client):
     response = client.get('/cpu/auslastung')
     assert response.status_code == 200
-    assert response.data.decode() == "CPU Auslastung ist 0.0%" 
+    # assert response.data.decode() == "CPU Auslastung ist 0.0%" 
+    response = client.get('/cpu/auslastung')
+    assert re.match("CPU Auslastung ist \d+\.\d+%",response.data.decode())
+
 
 @pytest.mark.unit
 def test_cpu_temp(client):
