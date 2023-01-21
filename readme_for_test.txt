@@ -52,4 +52,13 @@ access via webbrowser (or ip address)
 
 
 ----------
+check the output of the test by running the pytest command in the terminal.
+
 use a command like docker exec to run the tests inside the container
+You can also add the -v flag to the pytest command to see more detailed output, such as the names of the test functions being run and their output.
+
+To check the coverage of the test, you can use the coverage library by running the command coverage run -m pytest. This will run the test and generate a coverage report.
+
+Then you can see the coverage report by running coverage report -m to see the coverage of each file.
+
+You can also generate a html report for better visualization, by running coverage html then open the htmlcov/index.html file to see the coverage report.
