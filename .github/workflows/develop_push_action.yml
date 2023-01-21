@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:docker"
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v6
           push: false
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:test
           target: test
@@ -57,7 +57,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:docker"
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v6
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sdp:development
           target: development
