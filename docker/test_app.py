@@ -16,7 +16,7 @@ def client():
 def test_cpu_auslastung(client):
     response = client.get('/cpu/auslastung')
     assert response.status_code == 200
-    assert response.data.decode() == "CPU Auslastung ist 0.0%"
+    assert response.data.decode() == "CPU Auslastung ist 0.0%" 
 
 @pytest.mark.unit
 def test_cpu_temp(client):

@@ -62,3 +62,13 @@ To check the coverage of the test, you can use the coverage library by running t
 Then you can see the coverage report by running coverage report -m to see the coverage of each file.
 
 You can also generate a html report for better visualization, by running coverage html then open the htmlcov/index.html file to see the coverage report.
+
+
+---------
+test_integration.py
+----------
+This test uses the Flask test client to send GET requests to each of the routes defined in the code and checks the response status code and data. It asserts that the response status code is 200 and that the response data contains specific strings that indicate that the routes are working correctly.
+
+It's important to note that this test will only check whether the routes are working and returning the expected data, it will not check the accuracy of the data returned as this is an integration test.
+
+It's also important to test the application in a controlled environment, such as running it in a container, to make sure that the results are consistent and the test is not influenced by other processes or external factors.
