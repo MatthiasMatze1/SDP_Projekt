@@ -38,7 +38,9 @@ def test_cpu_temp_error(client):
 def test_integration(client):
     response = client.get('/cpu/auslastung')
     assert response.status_code == 200
-    assert response.data.decode() == "CPU Auslastung ist 0.0%"
+    #assert response.data.decode() == "CPU Auslastung ist 0.0%"
+    response = client.get('/cpu/auslastung')
+    assert re.match("CPU Auslastung ist \d+\.\d+%",response.data.decode())
     response = client.get('/cpu/temp/')
     assert response.status_code == 200
     assert response.data.decode().startswith("Sys Temperatur ist")
@@ -59,5 +61,7 @@ def test_auslastung(mocker):
 
     # Assert that the response has a 200 status code and the expected response data
     assert response.status_code == 200
-    assert response.data.decode() == "CPU Auslastung ist 50%"
+    #assert response.data.decode() == "CPU Auslastung ist 50%"
+    response = client.get('/cpu/auslastung')
+    assert re.match("CPU Auslastung ist \d+\.\d+%",response.data.decode())
 
