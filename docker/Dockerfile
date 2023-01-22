@@ -82,18 +82,18 @@ FROM base AS test
 
 RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 
-#COPY --from=base /opt/venv /opt/venv
+COPY --from=base /opt/venv /opt/venv
 
-#WORKDIR /SDP
+WORKDIR /SDP
 
-#COPY requirements/test.txt test.txt
+COPY requirements/test.txt test.txt
 
 #Für Test stage
 #COPY pytest.ini ./pytest.ini
 #COPY .coveragerc ./.coveragerc
 #COPY tests ./tests
 
-#RUN pip3 install -r test.txt
+RUN pip3 install -r test.txt
 
 
 # Code mitkopieren -> geht schneller
@@ -104,7 +104,7 @@ RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 #ENV PATH="/opt/venv/bin:$PATH"
 
 #Linting
-#RUN["flake8", "docker/app.py"]
+CMD ["flake8","docker"]
 #RUN["flake8", "tests/tests.py"]
 #RUN ["flake8","app/"]
 
