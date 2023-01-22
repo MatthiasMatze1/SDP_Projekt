@@ -88,6 +88,11 @@ RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 
 #COPY requirements/test.txt test.txt
 
+#Für Test stage
+#COPY pytest.ini ./pytest.ini
+#COPY .coveragerc ./.coveragerc
+#COPY tests ./tests
+
 #RUN pip3 install -r test.txt
 
 
@@ -98,8 +103,15 @@ RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 
 #ENV PATH="/opt/venv/bin:$PATH"
 
+#Linting
+#RUN["flake8", "docker/app.py"]
+#RUN["flake8", "tests/tests.py"]
 #RUN ["flake8","app/"]
 
+#RUN ["coverage","run","-m","pytest","-m","unit"]
+#RUN ["coverage","run","-m","pytest","-m","integration"]
+
+#RUN ["coverage","report","--fail-under","80"]
 
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
 FROM base AS production
