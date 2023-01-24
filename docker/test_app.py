@@ -1,11 +1,9 @@
-from flask import Flask, Blueprint
-import psutil
-#from docker import app
+# from flask import Flask
+# from docker import app
 import pytest
-from flask import Flask
-import psutil
-from app import app, bp, bptemp, bpdisk
-from flask.testing import FlaskClient
+from app import app
+# from app import bp, bptemp, bpdisk
+# from flask.testing import FlaskClient
 import re
 
 
@@ -13,14 +11,18 @@ import re
 def client():
     app.config['TESTING'] = True
     client = app.test_client()
+
     yield client
+
+
 @pytest.mark.unit
 def test_cpu_auslastung(client):
     response = client.get('/cpu/auslastung')
+
     assert response.status_code == 200
-    # assert response.data.decode() == "CPU Auslastung ist 0.0%" 
+# assert response.data.decode() == "CPU Auslastung ist 0.0%"
     response = client.get('/cpu/auslastung')
-    assert re.match("CPU Auslastung ist \d+\.\d+%",response.data.decode())
+    assert re.match(r"CPU Auslastung ist \d+\.\d+%", response.data.decode())
 
 
 @pytest.mark.unit
@@ -29,18 +31,21 @@ def test_cpu_temp(client):
     assert response.status_code == 200
     assert response.data.decode().startswith("Sys Temperatur ist")
 
+
 @pytest.mark.unit
 def test_cpu_temp_error(client):
     response = client.get('/cpu/temp/error')
     assert response.status_code == 200
     assert response.data.decode().startswith("Temperatur ")
+
+
 @pytest.mark.integration
 def test_integration(client):
     response = client.get('/cpu/auslastung')
     assert response.status_code == 200
-    #assert response.data.decode() == "CPU Auslastung ist 0.0%"
+# assert response.data.decode() == "CPU Auslastung ist 0.0%"
     response = client.get('/cpu/auslastung')
-    assert re.match("CPU Auslastung ist \d+\.\d+%",response.data.decode())
+    assert re.match(r"CPU Auslastung ist \d+\.\d+%", response.data.decode())
     response = client.get('/cpu/temp/')
     assert response.status_code == 200
     assert response.data.decode().startswith("Sys Temperatur ist")
@@ -56,13 +61,14 @@ def test_auslastung(mocker):
     # Use the mocker fixture to patch the psutil.cpu_percent function
     mocker.patch("psutil.cpu_percent", return_value=50)
 
-    # Use the client fixture to make a GET request to the '/cpu/auslastung' endpoint
+    # Use the client fixture to make a GET request to the
+    # '/cpu/auslastung' endpoint
     response = app.test_client().get('/cpu/auslastung')
 
-    # Assert that the response has a 200 status code and the expected response data
+    # Assert that the response has a 200 status code and
+    # the expected response data
     assert response.status_code == 200
-    #assert response.data.decode() == "CPU Auslastung ist 50%"
-    #response = client().get('/cpu/auslastung')
-    #assert re.match("CPU Auslastung ist 50%",response.data.decode())
-    assert response.data.decode() == "CPU Auslastung ist 50%" 
-
+    # assert response.data.decode() == "CPU Auslastung ist 50%"
+    # response = client().get('/cpu/auslastung')
+    # assert re.match("CPU Auslastung ist 50%",response.data.decode())
+    assert response.data.decode() == "CPU Auslastung ist 50%"

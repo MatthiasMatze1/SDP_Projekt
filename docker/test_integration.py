@@ -12,12 +12,12 @@
 # app.register_blueprint(bptemp)
 # app.register_blueprint(bpdisk)
 
-# #@pytest.mark.integration
-# #def test_cpu_auslastung_integration():
-# #    with app.test_client() as client:
-# #        response = client.get('/cpu/auslastung')
-# #        assert response.status_code == 200
-# #        assert b'CPU Auslastung ist' in response.data
+# @pytest.mark.integration
+# def test_cpu_auslastung_integration():
+#    with app.test_client() as client:
+#        response = client.get('/cpu/auslastung')
+#        assert response.status_code == 200
+#        assert b'CPU Auslastung ist' in response.data
 
 # @pytest.mark.integration
 # def test_cpu_temperatur_integration():
@@ -31,7 +31,9 @@
 #     with app.test_client() as client:
 #         response = client.get('/cpu/temp/error')
 #         assert response.status_code == 200
-#         assert (b'Temperatur zu hoch |' in response.data) or (b'Temperatur in Ordnung |' in response.data)
+#         zu_hoch = 'Temperatur zu hoch |'
+#         io_ok = 'Temperatur in Ordnung |'
+#         assert (b'zu_hoch |' in response.data) or (b'io_ok' in response.data)
 
 # @pytest.mark.integration
 # def test_ram_integration():
