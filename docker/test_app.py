@@ -62,7 +62,7 @@ def test_auslastung(mocker):
     # Use the mocker fixture to patch the psutil.cpu_percent function
     mocker.patch("psutil.cpu_percent", return_value=50)
 
-    # Use the client fixture to make a GET request to the '/cpu/auslastung' endpoint
+    # Use the client fixture for a GET request to '/cpu/auslastung' endpoint
     response = app.test_client().get('/cpu/auslastung')
 
     # Assert that the response has a 200 status code and
@@ -80,12 +80,13 @@ def test_lowcpu(mocker):
 
 def test_disk(mocker):
     # Use the mocker fixture to patch the psutil.disk_usage function
-    mocker.patch("psutil.disk_usage", return_value=psutil._common.sdiskusage
-            (total=1000, used=500, free=500, percent=50))
+    mocker.patch("psutil.disk_usage", return_value=psutil._common.sdiskusage(
+                 total=1000, used=500, free=500, percent=50))
 
-    # Use the client fixture to make a GET request to the '/disk/usage' endpoint
+    # Use the client fixture for a GET request to the '/disk/usage' endpoint
     response = app.test_client().get('/disk/usage')
 
-    # Assert that the response has a 200 status code and the expected response data
+    # Assert that the response has a 200 status code and
+    # the expected response data
     assert response.status_code == 200
     assert response.data.decode() == "Disk Usage ist 50%"
