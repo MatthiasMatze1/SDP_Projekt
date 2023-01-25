@@ -84,6 +84,27 @@ The tests are divided into 4 main categories:
     test_integration: This test checks if all endpoints are working correctly together. The test asserts that the response status code is 200 and that the response data matches the expected output for each endpoint.
     test_auslastung, test_lowcpu, test_disk: These tests check the behavior of the code when certain conditions are met. The tests use the mocker fixture to patch the psutil.cpu_percent and psutil.disk_usage functions and simulate different conditions. The tests assert that the response status code is 200 and that the response data matches the expected output for each endpoint.
 
+You can check the coverage of your tests by using a tool such as coverage.py
+First, you will need to install the coverage package by running:
+
+pip install coverage
+
+hen, you can run your tests with coverage measurement by using the coverage run command, followed by the command to run your tests. For example:
+
+coverage run -m pytest
+Once the tests have completed, you can generate a coverage report using the coverage report command. This will show you the percentage of lines in your code that have been executed by the tests.
+
+You can also generate a detailed report in HTML format using coverage html command. This will create a folder named 'htmlcov' in the same directory where you ran the command and you can open the index.html in your browser.
+
+Here is an example of how to check the coverage:
+
+coverage run -m pytest
+coverage report
+coverage html
+if you're using a package like pytest-cov you can use the pytest --cov=<module_name> command to check the coverage in the same command of running the tests.
+
+You can also specify the minimum coverage percentage that you want to achieve by using the `--cov-fail-under=<
+
 Conclusion
 
 This test file provides a comprehensive way of testing the monitoring application that exposed through different endpoints. It covers different scenarios and conditions that the application might encounter. However, it's important to note that this test file is just a sample and it might need to be modified or expanded based on the actual implementation of the application.
