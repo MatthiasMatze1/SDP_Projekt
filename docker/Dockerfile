@@ -82,13 +82,25 @@ FROM base AS test
 
 RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 
-#COPY --from=base /opt/venv /opt/venv
 
-#WORKDIR /SDP
+COPY --from=base /opt/venv /opt/venv
 
-#COPY requirements/test.txt test.txt
+WORKDIR /SDP
 
-#RUN pip3 install -r test.txt
+ENV FLASK_APP=app
+ENV FLASK_ENV=development
+EXPOSE 5000
+
+COPY requirements/test.txt test.txt
+COPY test_integration.py test_integration.py
+COPY test_app.py test_app.py
+#Für Test stage
+COPY pytest.ini ./pytest.ini
+#COPY .coveragerc ./.coveragerc
+#COPY tests ./tests
+COPY app.py app.py
+
+RUN pip3 install -r test.txt
 
 
 # Code mitkopieren -> geht schneller
@@ -96,10 +108,19 @@ RUN echo "--------------------BUILDING TEST IMAGE--------------------"
 #COPY app/ app/
 
 
-#ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/opt/venv/bin:$PATH"
 
-#RUN ["flake8","app/"]
+#Linting and unit, integration testing
+CMD ["flake8","docker"]
+RUN ["flake8","test_app.py"]
+RUN ["flake8","test_integration.py"]
 
+#RUN ["coverage","run","-m","pytest","-m","unit"]
+#RUN ["coverage","run","-m","pytest","-m","integration"]
+
+CMD ["coverage", "run -m --source=. pytest -v"]
+#CMD ["coverage", "report"]
+CMD ["coverage","report","--fail-under","80"]
 
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
 FROM base AS production
