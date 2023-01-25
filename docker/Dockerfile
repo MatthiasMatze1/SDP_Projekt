@@ -87,13 +87,18 @@ COPY --from=base /opt/venv /opt/venv
 
 WORKDIR /SDP
 
+ENV FLASK_APP=app
+ENV FLASK_ENV=development
+EXPOSE 5000
+
 COPY requirements/test.txt test.txt
 COPY test_integration.py test_integration.py
 COPY test_app.py test_app.py
 #Für Test stage
-#COPY pytest.ini ./pytest.ini
+COPY pytest.ini ./pytest.ini
 #COPY .coveragerc ./.coveragerc
 #COPY tests ./tests
+COPY app.py app.py
 
 RUN pip3 install -r test.txt
 
@@ -105,15 +110,17 @@ RUN pip3 install -r test.txt
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-#Linting
+#Linting and unit, integration testing
 CMD ["flake8","docker"]
 RUN ["flake8","test_app.py"]
 RUN ["flake8","test_integration.py"]
 
-RUN ["coverage","run","-m","pytest","-m","unit"]
-RUN ["coverage","run","-m","pytest","-m","integration"]
+#RUN ["coverage","run","-m","pytest","-m","unit"]
+#RUN ["coverage","run","-m","pytest","-m","integration"]
 
-#RUN ["coverage","report","--fail-under","80"]
+CMD ["coverage", "run -m --source=. pytest -v"]
+#CMD ["coverage", "report"]
+CMD ["coverage","report","--fail-under","80"]
 
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
 FROM base AS production
