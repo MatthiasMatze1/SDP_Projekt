@@ -52,23 +52,38 @@ access via webbrowser (or ip address)
 
 
 ----------
-check the output of the test by running the pytest command in the terminal.
+after running the docker image you are ready to go for the test
 
-use a command like docker exec to run the tests inside the container
-You can also add the -v flag to the pytest command to see more detailed output, such as the names of the test functions being run and their output.
+This test_file(test_app.py) contains a sample test file for monitoring CPU usage, CPU temperature, and disk usage using Python and the psutil library. The test file uses the Flask framework for creating a web server that exposes the monitoring information through different endpoints. The test file also uses the pytest framework for unit and integration testing.
+Prerequisites
 
-To check the coverage of the test, you can use the coverage library by running the command coverage run -m pytest. This will run the test and generate a coverage report.
+To run the tests, you will need to have the following software installed on your machine:
 
-Then you can see the coverage report by running coverage report -m to see the coverage of each file.
+    Python 3
+    Pytest
+if you do not have pytest.install it with this command on the terminal.
+pip install pytest. 
+you can check the version of your pytest with this command.
+pytest --version
+You also need to have access to the code that the test file is testing, and it should be running on the same machine or accessible through the network.
+Running the tests.
 
-You can also generate a html report for better visualization, by running coverage html then open the htmlcov/index.html file to see the coverage report.
+To run the tests, navigate to the directory where the test file is located and run the following command:
+
+pytest test_app.py
+if you would like to have more detail about the testrun this command.
+pytest test_app.py -v
 
 
----------
-test_integration.py
-----------
-This test uses the Flask test client to send GET requests to each of the routes defined in the code and checks the response status code and data. It asserts that the response status code is 200 and that the response data contains specific strings that indicate that the routes are working correctly.
+This command runs all the tests defined in the test file. The tests check the correctness of the monitoring information returned by the different endpoints and the behavior of the code under different conditions.
+Test Categories
 
-It's important to note that this test will only check whether the routes are working and returning the expected data, it will not check the accuracy of the data returned as this is an integration test.
+The tests are divided into 4 main categories:
 
-It's also important to test the application in a controlled environment, such as running it in a container, to make sure that the results are consistent and the test is not influenced by other processes or external factors.
+    test_cpu_auslastung, test_cpu_temp, test_cpu_temp_error, test_disk_usage: These tests check the correctness of the data returned by the different endpoints. The endpoints are /cpu/auslastung, /cpu/temp/, /cpu/temp/error, /disk/usage respectively. The tests assert that the response status code is 200 and that the response data matches the expected output.
+    test_integration: This test checks if all endpoints are working correctly together. The test asserts that the response status code is 200 and that the response data matches the expected output for each endpoint.
+    test_auslastung, test_lowcpu, test_disk: These tests check the behavior of the code when certain conditions are met. The tests use the mocker fixture to patch the psutil.cpu_percent and psutil.disk_usage functions and simulate different conditions. The tests assert that the response status code is 200 and that the response data matches the expected output for each endpoint.
+
+Conclusion
+
+This test file provides a comprehensive way of testing the monitoring application that exposed through different endpoints. It covers different scenarios and conditions that the application might encounter. However, it's important to note that this test file is just a sample and it might need to be modified or expanded based on the actual implementation of the application.
