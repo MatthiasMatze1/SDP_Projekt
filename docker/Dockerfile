@@ -123,6 +123,7 @@ RUN coverage run -m --source=. pytest -v
 RUN ["coverage","report","--fail-under","80"]
 #jeder einzelne kommand unter "" nur bei cmd befehlen 
 #Github actions verstehen den psutil lib command cpu_thermals nicht
+#Bei run bzw cmd fährt der container nach dem builden runter und die befehle werden nicht ausgeführt
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
 FROM base AS production
 RUN echo "build Production image"
