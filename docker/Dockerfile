@@ -118,9 +118,9 @@ RUN ["flake8","test_integration.py"]
 #RUN ["coverage","run","-m","pytest","-m","unit"]
 #RUN ["coverage","run","-m","pytest","-m","integration"]
 
-CMD ["coverage", "run -m --source=. pytest -v"]
+RUN coverage run -m --source=. pytest -v
 #CMD ["coverage", "report"]
-CMD ["coverage","report","--fail-under","80"]
+RUN ["coverage","report","--fail-under","80"]
 
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
 FROM base AS production
