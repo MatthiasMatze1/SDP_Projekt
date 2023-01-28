@@ -121,7 +121,8 @@ RUN ["flake8","test_integration.py"]
 RUN coverage run -m --source=. pytest -v
 #CMD ["coverage", "report"]
 RUN ["coverage","report","--fail-under","80"]
-
+#jeder einzelne kommand unter "" nur bei cmd befehlen 
+#Github actions verstehen den psutil lib command cpu_thermals nicht
 #-----------------------------------------PRODUCTION------------------------------------------------------------------
 FROM base AS production
 RUN echo "build Production image"
